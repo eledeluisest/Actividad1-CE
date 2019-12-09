@@ -202,13 +202,13 @@ class algoritmo_genetico():
                         index_res2.pop(index_res2.index(padre1.index(hijo2[i_tmp])))
                     except:
                         warnings.warn('Actualizamos segmento interior')
-        # rellenamos el hijo con los valores del padre 2
+        # rellenamos el hijo1 con los valores del padre 2 y al revés
         for i in index_res1:
-            hijo1[i] = padre1[i]
+            hijo1[i] = padre2[i]
             index_hijo1.append(i)
 
         for i in index_res2:
-            hijo2[i] = padre2[i]
+            hijo2[i] = padre1[i]
             index_hijo2.append(i)
         """
         # Parta para una ejecucion que compruebe la integridad en cada paso
