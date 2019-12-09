@@ -204,7 +204,7 @@ class algoritmo_genetico():
                         warnings.warn('Actualizamos segmento interior')
         # rellenamos el hijo con los valores del padre 2
         for i in index_res1:
-            hijo1[i] = padre2[i]
+            hijo1[i] = padre1[i]
             index_hijo1.append(i)
 
         for i in index_res2:
