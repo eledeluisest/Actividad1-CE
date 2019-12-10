@@ -54,8 +54,8 @@ class generador_ejemplos:
 
     def __args__(self):
         print(' Estamos ante el problema ' + self.__problema__ + ' con: ')
-        print('Puntos: ' + self.__NPuntos__)
-        print('Dimension: ' + self.__dimension__)
+        print('Puntos: ' + str(self.__NPuntos__))
+        print('Dimension: ' + str(self.__dimension__))
         print('Limites: ')
         [print(l) for l in self.__limites__]
 
@@ -177,9 +177,9 @@ class algoritmo_genetico():
         # Recorremos los elementos del segmento para ambos descendientes a la vez
         for i in index_segmento:
             # print(val_segmento, padre2[i], padre2.index(hijo[i]), index_hijo)
+            # Para el hijo 1
             if padre2[i] not in val_segmento1:
                 i_tmp = i
-                # Para el hijo 1
                 while padre2.index(hijo1[i_tmp]) in index_hijo1:
                     # print(i_tmp, padre2[i_tmp], hijo[i_tmp], padre2.index(hijo[i_tmp]))
                     i_tmp = padre2.index(hijo1[i_tmp])
@@ -191,33 +191,34 @@ class algoritmo_genetico():
                     warnings.warn('Actualizamos segmento interior')
 
                 # Para el hijo 2
-                if padre1[i] not in val_segmento2:
-                    i_tmp = i
-                    while padre1.index(hijo2[i_tmp]) in index_hijo2:
-                        # print(i_tmp, padre2[i_tmp], hijo[i_tmp], padre2.index(hijo[i_tmp]))
-                        i_tmp = padre1.index(hijo2[i_tmp])
-                    hijo2[padre1.index(hijo2[i_tmp])] = padre1[i]
-                    index_hijo2.append(padre1.index(hijo2[i_tmp]))
-                    try:
-                        index_res2.pop(index_res2.index(padre1.index(hijo2[i_tmp])))
-                    except:
-                        warnings.warn('Actualizamos segmento interior')
+            if padre1[i] not in val_segmento2:
+                i_tmp = i
+
+                while padre1.index(hijo2[i_tmp]) in index_hijo2:
+                    i_tmp = padre1.index(hijo2[i_tmp])
+                hijo2[padre1.index(hijo2[i_tmp])] = padre1[i]
+                index_hijo2.append(padre1.index(hijo2[i_tmp]))
+                try:
+                    index_res2.pop(index_res2.index(padre1.index(hijo2[i_tmp])))
+                except:
+                    warnings.warn('Actualizamos segmento interior')
         # rellenamos el hijo1 con los valores del padre 2 y al revés
         for i in index_res1:
             hijo1[i] = padre2[i]
             index_hijo1.append(i)
 
         for i in index_res2:
+
             hijo2[i] = padre1[i]
             index_hijo2.append(i)
         """
-        # Parta para una ejecucion que compruebe la integridad en cada paso
-        if len(hijo1) == self.__n_puntos__ and np.mean(self.__permutaciones__) == np.mean(hijo1)\
-                and len(hijo2) == self.__n_puntos__ and np.mean(self.__permutaciones__) == np.mean(hijo2):
+        # Para para una ejecucion que compruebe la integridad en cada paso
+        if len(hijo1) == self.__n_puntos__ and np.mean(self.__permutaciones__) == np.mean(hijo1) and\
+                len(hijo2) == self.__n_puntos__ and np.mean(self.__permutaciones__) == np.mean(hijo2):
             return hijo1, hijo2
         else:
-            # print(punto_1, punto_2, index_hijo1, index_res1, index_segmento, padre1, padre2, hijo1)
-            # print(punto_1, punto_2, index_hijo2, index_res2, index_segmento, padre1, padre2, hijo2)
+            print(punto_1, punto_2, index_hijo1, index_res1, index_segmento, padre1, padre2, hijo1)
+            print(punto_1, punto_2, index_hijo2, index_res2, index_segmento, padre1, padre2, hijo2)
             print(len(hijo1), np.mean(hijo1))
             print(len(hijo2), np.mean(hijo2))
             raise AttributeError('El hijo no tiene la longitud correcta')
