@@ -13,7 +13,6 @@ from utils import generador_ejemplos
 puntos = 100
 limites = [10, 10]
 instancias = 50
-# viajante = generador_ejemplos(problema='VIAJANTE', data_path='data/viajante_'+str(puntos)+'.csv')
 viajante = generador_ejemplos(problema='VIAJANTE', data_path='data/ejemplo1.csv')
 viajante.viajante_ini(n=puntos, lista_lim=limites)
 viajante.genera_instancias(instancias)
